@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "352380698534",
+    "project_id": "memzapp-bccfc",
+    "storage_bucket": "memzapp-bccfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352380698534:android:1cbd1ee19bf7b20706d967",
+        "android_client_info": {
+          "package_name": "com.example.memzstudio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352380698534-tjlkj7jvhab3ml09qpsbi5dh63v1g9ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsIZaqUqFgmrPoeP1ta36ewKNDSGPxtDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352380698534-tjlkj7jvhab3ml09qpsbi5dh63v1g9ok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
