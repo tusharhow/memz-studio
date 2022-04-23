@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'Ubuntu',
       ),
-      home: const PaymentScreen(),
+      home: const IndexScreen(),
       routes: {
         SignupScreen.routeName: (_) => const SignupScreen(),
         LoginScreen.routeName: (_) => const LoginScreen(),
