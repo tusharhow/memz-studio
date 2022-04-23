@@ -11,11 +11,16 @@ import 'package:memzstudio/booking_details.dart';
 import 'package:memzstudio/booking_screen.dart';
 import 'package:memzstudio/contact_us_screen.dart';
 import 'package:memzstudio/current_orders.dart';
+import 'package:memzstudio/customer/booking_details_customer.dart';
+import 'package:memzstudio/customer/my_profile.dart';
+import 'package:memzstudio/customer/payment_customer.dart';
+import 'package:memzstudio/customer/update_customer_profile.dart';
 import 'package:memzstudio/customer_packages_screen.dart';
 import 'package:memzstudio/customers_screen.dart';
 import 'package:memzstudio/forgot_password_screen.dart';
 import 'package:memzstudio/help_screen.dart';
 import 'package:memzstudio/home_screen.dart';
+import 'package:memzstudio/login_form.dart';
 import 'package:memzstudio/orders_screen.dart';
 import 'package:memzstudio/packages_screen.dart';
 import 'package:memzstudio/payment_screen.dart';
@@ -24,6 +29,7 @@ import 'package:memzstudio/profile_screen.dart';
 import 'package:memzstudio/report_details_screen.dart';
 import 'package:memzstudio/report_screen.dart';
 import 'package:memzstudio/reset_password_screen.dart';
+import 'package:memzstudio/signup_form.dart';
 import 'package:memzstudio/status_screen.dart';
 
 import 'admin/customer_screen.dart';
@@ -31,6 +37,18 @@ import 'admin/data_analyst_screen.dart';
 import 'admin/packages.dart';
 import 'admin/payment_screen_admin.dart';
 import 'admin/report.dart';
+import 'appointment_details_screen.dart';
+import 'customer/Videography_customer.dart';
+import 'customer/booking_screen_customer.dart';
+import 'customer/help_screen_customer.dart';
+import 'customer/history_of_order.dart';
+import 'customer/homepage.dart';
+import 'customer/packages_customer.dart';
+import 'customer/photography_customer.dart';
+import 'customer/report_generator.dart';
+import 'customer/services_customer.dart';
+import 'customer_details_screen.dart';
+import 'customer_package_details.dart';
 import 'signup_screen.dart';
 import 'login_screen.dart';
 import 'index_screen.dart';
@@ -62,7 +80,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'Ubuntu',
       ),
-      home: const PaymentScreenAdmin(),
+      home: const PaymentScreen(),
       routes: {
         SignupScreen.routeName: (_) => const SignupScreen(),
         LoginScreen.routeName: (_) => const LoginScreen(),

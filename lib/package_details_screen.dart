@@ -16,69 +16,98 @@ class PackageDetailsScreen extends StatelessWidget {
         title: const Text('Package Details'),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text('Title'),
-                    Text(package['title']),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text('Price'),
-                    Text(package['price']),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text('Hours'),
-                    Text(package['hours']),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text('Description'),
-                    Text(package['description']),
-                  ],
-                ),
-              ],
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/images/bg.png",
+              fit: BoxFit.cover,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 30,
+          //     right: 30,
+          //     left: 20,
+          //   ),
+          //   child: Image.asset(
+          //     "assets/images/menu.png",
+          //     height: 40,
+          //     width: 40,
+          //   ),
+          // ),
+          SizedBox(
+            height: 40,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.red[300]),
-                child: const Text('Delete'),
-                onPressed: () {
-                  FirebaseFirestore.instance
-                      .collection('packages')
-                      .doc(packageId)
-                      .delete();
-                  Navigator.of(context).pop();
-                },
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.blueGrey[600]),
-                child: const Text('Update'),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => UpdatePackageScreen(packageId, package),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text('Title'),
+                        Text(package['title']),
+                      ],
                     ),
-                  );
-                },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text('Price'),
+                        Text(package['price']),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text('Hours'),
+                        Text(package['hours']),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text('Description'),
+                        Text(package['description']),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.red[300]),
+                    child: const Text('Delete'),
+                    onPressed: () {
+                      FirebaseFirestore.instance
+                          .collection('packages')
+                          .doc(packageId)
+                          .delete();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(primary: Colors.blueGrey[600]),
+                    child: const Text('Update'),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              UpdatePackageScreen(packageId, package),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

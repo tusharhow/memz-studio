@@ -61,94 +61,126 @@ class _AddPackageScreenState extends State<AddPackageScreen> {
         title: const Text('New Package'),
         centerTitle: true,
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                  label: Text('Title'),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 0.5),
-                  ),
-                ),
-                keyboardType: TextInputType.emailAddress,
-                validator: (val) {
-                  if (val.isEmpty) return "Invalid title!";
-                  return null;
-                },
-                onSaved: (val) => data['title'] = val,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  label: Text('Price'),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 0.5),
-                  ),
-                ),
-                keyboardType: TextInputType.number,
-                validator: (val) {
-                  if (double.tryParse(val) == null ||
-                      double.tryParse(val) < 1) {
-                    return 'Invalid price!';
-                  }
-                  return null;
-                },
-                onSaved: (val) => data['price'] = val,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  label: Text('Total hours (HH:MM)'),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 0.5),
-                  ),
-                ),
-                inputFormatters: [
-                  MaskTextInputFormatter(
-                    mask: '##:##',
-                  ),
-                ],
-                keyboardType: TextInputType.number,
-                validator: (val) {
-                  if (val.isEmpty || val == "00:00" || val.length != 5)
-                    return "Invalid hours!";
-                  else if (int.parse(val.substring(0, 2)) > 8)
-                    return 'Hours cant be more than 8';
-                  return null;
-                },
-                onSaved: (val) => data['hours'] = val,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  label: Text('Description'),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 0.5),
-                  ),
-                ),
-                keyboardType: TextInputType.text,
-                validator: (val) {
-                  if (val.isEmpty) return "Invalid description!";
-                  return null;
-                },
-                onSaved: (val) => data['description'] = val,
-              ),
-              const SizedBox(height: 60),
-              ElevatedButton(
-                onPressed: _addPackage,
-                child: const Text('Add'),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(300, 40),
-                ),
-              )
-            ],
+      body: Stack(children: [
+        SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: Image.asset(
+            "assets/images/bg.png",
+            fit: BoxFit.cover,
           ),
         ),
-      ),
+        // Padding(
+        //   padding: const EdgeInsets.only(
+        //     top: 30,
+        //     right: 30,
+        //     left: 20,
+        //   ),
+        //   child: Image.asset(
+        //     "assets/images/menu.png",
+        //     height: 40,
+        //     width: 40,
+        //   ),
+        // ),
+        SizedBox(
+          height: 50,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 170,
+            // right: 30,
+            // left: 70,
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text('Title'),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.5),
+                      ),
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (val) {
+                      if (val.isEmpty) return "Invalid title!";
+                      return null;
+                    },
+                    onSaved: (val) => data['title'] = val,
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text('Price'),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.5),
+                      ),
+                    ),
+                    keyboardType: TextInputType.number,
+                    validator: (val) {
+                      if (double.tryParse(val) == null ||
+                          double.tryParse(val) < 1) {
+                        return 'Invalid price!';
+                      }
+                      return null;
+                    },
+                    onSaved: (val) => data['price'] = val,
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text('Total hours (HH:MM)'),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.5),
+                      ),
+                    ),
+                    inputFormatters: [
+                      MaskTextInputFormatter(
+                        mask: '##:##',
+                      ),
+                    ],
+                    keyboardType: TextInputType.number,
+                    validator: (val) {
+                      if (val.isEmpty || val == "00:00" || val.length != 5)
+                        return "Invalid hours!";
+                      else if (int.parse(val.substring(0, 2)) > 8)
+                        return 'Hours cant be more than 8';
+                      return null;
+                    },
+                    onSaved: (val) => data['hours'] = val,
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text('Description'),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.5),
+                      ),
+                    ),
+                    keyboardType: TextInputType.text,
+                    validator: (val) {
+                      if (val.isEmpty) return "Invalid description!";
+                      return null;
+                    },
+                    onSaved: (val) => data['description'] = val,
+                  ),
+                  const SizedBox(height: 60),
+                  ElevatedButton(
+                    onPressed: _addPackage,
+                    child: const Text('Add'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(300, 40),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

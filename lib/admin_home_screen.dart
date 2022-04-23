@@ -18,77 +18,105 @@ class AdminHomeScreen extends StatelessWidget {
         centerTitle: true,
       ),
       drawer: const DrawerScreen(),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
-          child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 4.0,
-            mainAxisSpacing: 8.0,
-            children: [
-              OutlinedButton.icon(
-                icon: Image.asset(
-                  'assets/images/customers.png',
-                  fit: BoxFit.cover,
-                ),
-                label: const Text('Customers'),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.white),
-                ),
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(CustomersScreen.routeName),
-              ),
-              OutlinedButton.icon(
-                icon: Image.asset(
-                  'assets/images/packages.png',
-                  fit: BoxFit.cover,
-                ),
-                label: const Text('Packages'),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.white),
-                ),
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(PackagesScreen.routeName),
-              ),
-              OutlinedButton.icon(
-                icon: Image.asset(
-                  'assets/images/report.png',
-                  fit: BoxFit.cover,
-                ),
-                label: const Text('Report'),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.white),
-                ),
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(ReportScreen.routeName),
-              ),
-              OutlinedButton.icon(
-                icon: Image.asset(
-                  'assets/images/analysis.png',
-                  fit: BoxFit.cover,
-                ),
-                label: const Text('Data Analysis'),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.white),
-                ),
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(AnalysisScreen.routeName),
-              ),
-              OutlinedButton.icon(
-                icon: Image.asset(
-                  'assets/images/appointment.png',
-                  fit: BoxFit.cover,
-                ),
-                label: const Text('Appointments'),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.white),
-                ),
-                onPressed: () => Navigator.of(context)
-                    .pushNamed(AppointmentScreen.routeName),
-              ),
-            ],
+      body: Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/images/bg.png",
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 30,
+          //     right: 30,
+          //     left: 20,
+          //   ),
+          //   child: Image.asset(
+          //     "assets/images/menu.png",
+          //     height: 40,
+          //     width: 40,
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 100,
+              right: 10,
+              left: 10,
+            ),
+            child: Center(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 8.0,
+                children: [
+                  OutlinedButton.icon(
+                    icon: Image.asset(
+                      'assets/images/customers.png',
+                      fit: BoxFit.cover,
+                    ),
+                    label: const Text('Customers'),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.white),
+                    ),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(CustomersScreen.routeName),
+                  ),
+                  OutlinedButton.icon(
+                    icon: Image.asset(
+                      'assets/images/packages.png',
+                      fit: BoxFit.cover,
+                    ),
+                    label: const Text('Packages'),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.white),
+                    ),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(PackagesScreen.routeName),
+                  ),
+                  OutlinedButton.icon(
+                    icon: Image.asset(
+                      'assets/images/report.png',
+                      fit: BoxFit.cover,
+                    ),
+                    label: const Text('Report'),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.white),
+                    ),
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(ReportScreen.routeName),
+                  ),
+                  OutlinedButton.icon(
+                    icon: Image.asset(
+                      'assets/images/analysis.png',
+                      fit: BoxFit.cover,
+                    ),
+                    label: const Text('Data Analysis'),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.white),
+                    ),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(AnalysisScreen.routeName),
+                  ),
+                  OutlinedButton.icon(
+                    icon: Image.asset(
+                      'assets/images/appointment.png',
+                      fit: BoxFit.cover,
+                    ),
+                    label: const Text('Appointments'),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.white),
+                    ),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(AppointmentScreen.routeName),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

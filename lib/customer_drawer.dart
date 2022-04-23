@@ -77,6 +77,18 @@ class CustomerDrawerScreen extends StatelessWidget {
                   Navigator.of(context).pushNamed(ContactUsScreen.routeName),
             ),
             ListTile(
+              title: const Text('Help'),
+              trailing: const Icon(
+                Icons.logout_rounded,
+                color: Colors.blueGrey,
+              ),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context)
+                    .pushReplacementNamed(HelpScreen.routeName);
+              },
+            ),
+            ListTile(
                 title: const Text('Logout'),
                 trailing: const Icon(
                   Icons.logout_rounded,

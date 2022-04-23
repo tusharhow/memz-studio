@@ -63,86 +63,117 @@ class AppointmentDetailsScreen extends StatelessWidget {
             title: const Text('Appointment\'s details'),
             centerTitle: true,
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 50),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('Packge title'),
-                    Text(appointment['package']['title']),
-                  ],
+          body: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: Image.asset(
+                  "assets/images/bg.png",
+                  fit: BoxFit.cover,
                 ),
-                Row(
+              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(
+              //     top: 30,
+              //     right: 30,
+              //     left: 20,
+              //   ),
+              //   child: Image.asset(
+              //     "assets/images/menu.png",
+              //     height: 40,
+              //     width: 40,
+              //   ),
+              // ),
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 50),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Appointment Date'),
-                    Text((appointment['date'] as Timestamp)
-                        .toDate()
-                        .toString()
-                        .substring(0, 16)),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('Customer Name'),
-                    Text(appointment['user']['full_name']),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('Customer Phone Number'),
-                    Text(appointment['user']['phone_number']),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('Price'),
-                    Text('${appointment['package']['price']} OMR'),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      child: const Text('Completed'),
-                      onPressed: () async {
-                        await FirebaseFirestore.instance
-                            .collection('bookings')
-                            .doc(bookingId)
-                            .update({
-                          'status': 'completed',
-                        });
-                        Navigator.of(context).pop();
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('Packge title'),
+                        Text(appointment['package']['title']),
+                      ],
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                      child: const Text('Print'),
-                      onPressed: () => generateAppointmentReport(appointment),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('Appointment Date'),
+                        Text((appointment['date'] as Timestamp)
+                            .toDate()
+                            .toString()
+                            .substring(0, 16)),
+                      ],
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.red[300]),
-                      child: const Text('Reject'),
-                      onPressed: () async {
-                        await FirebaseFirestore.instance
-                            .collection('bookings')
-                            .doc(bookingId)
-                            .update({
-                          'status': 'rejected',
-                        });
-                        Navigator.of(context).pop();
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('Customer Name'),
+                        Text(appointment['user']['full_name']),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('Customer Phone Number'),
+                        Text(appointment['user']['phone_number']),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('Price'),
+                        Text('${appointment['package']['price']} OMR'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('Completed'),
+                          onPressed: () async {
+                            await FirebaseFirestore.instance
+                                .collection('bookings')
+                                .doc(bookingId)
+                                .update({
+                              'status': 'completed',
+                            });
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.blueGrey),
+                          child: const Text('Print'),
+                          onPressed: () =>
+                              generateAppointmentReport(appointment),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.red[300]),
+                          child: const Text('Reject'),
+                          onPressed: () async {
+                            await FirebaseFirestore.instance
+                                .collection('bookings')
+                                .doc(bookingId)
+                                .update({
+                              'status': 'rejected',
+                            });
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

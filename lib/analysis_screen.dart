@@ -13,8 +13,37 @@ class AnalysisScreen extends StatelessWidget {
           title: const Text('Data Analysis'),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        body: Stack(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: Image.asset(
+            "assets/images/bg.png",
+            fit: BoxFit.cover,
+          ),
+        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(
+        //     top: 30,
+        //     right: 30,
+        //     left: 20,
+        //   ),
+        //   child: Image.asset(
+        //     "assets/images/menu.png",
+        //     height: 40,
+        //     width: 40,
+        //   ),
+        // ),
+        SizedBox(
+          height: 70,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 120,
+            right: 10,
+            left: 10,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -31,7 +60,9 @@ class AnalysisScreen extends StatelessWidget {
               PieChart()
             ],
           ),
-        ));
+        ),
+      ],
+    ));
   }
 }
 

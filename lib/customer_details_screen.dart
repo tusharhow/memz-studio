@@ -14,80 +14,107 @@ class CustomerDetailsScreen extends StatelessWidget {
         title: const Text('Customer Details'),
         centerTitle: true,
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Image.asset(
-            './assets/images/user.png',
-            height: 200,
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/images/bg.png",
+              fit: BoxFit.cover,
+            ),
           ),
-          Text(
-            user['full_name'],
-            style: const TextStyle(fontSize: 24),
-          ),
-          const SizedBox(
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 30,
+          //     right: 30,
+          //     left: 20,
+          //   ),
+          //   child: Image.asset(
+          //     "assets/images/menu.png",
+          //     height: 40,
+          //     width: 40,
+          //   ),
+          // ),
+          SizedBox(
             height: 40,
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ListTile(
-                leading: const Icon(
-                  Icons.email,
-                  color: Colors.blueGrey,
-                ),
-                title: const Text('Email'),
-                trailing: Text(user['email']),
+              Image.asset(
+                './assets/images/user.png',
+                height: 200,
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.phone,
-                  color: Colors.blueGrey,
-                ),
-                title: const Text('Phone Number'),
-                trailing: Text(user['phone_number']),
+              Text(
+                user['full_name'],
+                style: const TextStyle(fontSize: 24),
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.male,
-                  color: Colors.blueGrey,
-                ),
-                title: const Text('Gender'),
-                trailing: Text(user['gender']),
+              const SizedBox(
+                height: 40,
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.location_pin,
-                  color: Colors.blueGrey,
-                ),
-                title: const Text('Location'),
-                trailing: Text(user['location']),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ListTile(
+                    leading: const Icon(
+                      Icons.email,
+                      color: Colors.blueGrey,
+                    ),
+                    title: const Text('Email'),
+                    trailing: Text(user['email']),
+                  ),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.phone,
+                      color: Colors.blueGrey,
+                    ),
+                    title: const Text('Phone Number'),
+                    trailing: Text(user['phone_number']),
+                  ),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.male,
+                      color: Colors.blueGrey,
+                    ),
+                    title: const Text('Gender'),
+                    trailing: Text(user['gender']),
+                  ),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.location_pin,
+                      color: Colors.blueGrey,
+                    ),
+                    title: const Text('Location'),
+                    trailing: Text(user['location']),
+                  ),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.date_range,
+                      color: Colors.blueGrey,
+                    ),
+                    title: const Text('Date of birth'),
+                    trailing: Text(user['dob']),
+                  ),
+                ],
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.date_range,
-                  color: Colors.blueGrey,
+              const SizedBox(
+                height: 40,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red[300],
+                  minimumSize: Size(300, 40),
                 ),
-                title: const Text('Date of birth'),
-                trailing: Text(user['dob']),
+                child: const Text('Delete'),
+                onPressed: () {
+                  FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(userId)
+                      .delete();
+                  Navigator.of(context).pop();
+                },
               ),
             ],
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.red[300],
-              minimumSize: Size(300, 40),
-            ),
-            child: const Text('Delete'),
-            onPressed: () {
-              FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(userId)
-                  .delete();
-              Navigator.of(context).pop();
-            },
           ),
         ],
       ),

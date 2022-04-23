@@ -139,52 +139,79 @@ class ReportScreen extends StatelessWidget {
         title: const Text('Report'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('./assets/images/report-bg.png'),
-            SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: ListTile(
-                trailing: Icon(Icons.book),
-                title: const Text('List of bookings'),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.grey, width: 0.5),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                onTap: generateBookingsReport,
-              ),
+      body: Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/images/bg.png",
+              fit: BoxFit.cover,
             ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: ListTile(
-                trailing: Icon(Icons.add_box),
-                title: const Text('List of packages'),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.grey, width: 0.5),
-                  borderRadius: BorderRadius.circular(10),
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 30,
+          //     right: 30,
+          //     left: 20,
+          //   ),
+          //   child: Image.asset(
+          //     "assets/images/menu.png",
+          //     height: 40,
+          //     width: 40,
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 50,
+          // ),
+          Center(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('./assets/images/report-bg.png'),
+                SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: ListTile(
+                    trailing: Icon(Icons.book),
+                    title: const Text('List of bookings'),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Colors.grey, width: 0.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onTap: generateBookingsReport,
+                  ),
                 ),
-                onTap: generatePackagesReport,
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: ListTile(
-                trailing: Icon(Icons.person),
-                title: const Text('List of customers'),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.grey, width: 0.5),
-                  borderRadius: BorderRadius.circular(10),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: ListTile(
+                    trailing: Icon(Icons.add_box),
+                    title: const Text('List of packages'),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Colors.grey, width: 0.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onTap: generatePackagesReport,
+                  ),
                 ),
-                onTap: generateUsersReport,
-              ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: ListTile(
+                    trailing: Icon(Icons.person),
+                    title: const Text('List of customers'),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Colors.grey, width: 0.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onTap: generateUsersReport,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

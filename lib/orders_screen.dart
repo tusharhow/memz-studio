@@ -82,10 +82,37 @@ class OrderScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: Stack(
           children: [
-            CurrentOrders(),
-            HistoryOrders(),
+            SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Image.asset(
+                "assets/images/bg.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     top: 30,
+            //     right: 30,
+            //     left: 20,
+            //   ),
+            //   child: Image.asset(
+            //     "assets/images/menu.png",
+            //     height: 40,
+            //     width: 40,
+            //   ),
+            // ),
+            SizedBox(
+              height: 50,
+            ),
+            const TabBarView(
+              children: [
+                CurrentOrders(),
+                HistoryOrders(),
+              ],
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(

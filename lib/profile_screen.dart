@@ -73,128 +73,157 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: const Text('Profile'),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-          future:
-              FirebaseFirestore.instance.collection('users').doc(_userId).get(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final userDoc = snapshot.data.data() as Map<String, dynamic>;
-            selectedGender =
-                userDoc['gender'] != '' ? userDoc['gender'] : 'male';
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text('Full Name'),
-                        ),
-                        keyboardType: TextInputType.name,
-                        initialValue: userDoc['full_name'] ?? '',
-                        validator: (val) {
-                          if (val.isEmpty) return "Invalid name!";
-                          return null;
-                        },
-                        onSaved: (val) => data['full_name'] = val,
+      body: Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/images/bg.png",
+              fit: BoxFit.cover,
+            ),
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 30,
+          //     right: 30,
+          //     left: 20,
+          //   ),
+          //   child: Image.asset(
+          //     "assets/images/menu.png",
+          //     height: 40,
+          //     width: 40,
+          //   ),
+          // ),
+          SizedBox(
+            height: 0,
+          ),
+          FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(_userId)
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                final userDoc = snapshot.data.data() as Map<String, dynamic>;
+                selectedGender =
+                    userDoc['gender'] != '' ? userDoc['gender'] : 'male';
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              label: Text('Full Name'),
+                            ),
+                            keyboardType: TextInputType.name,
+                            initialValue: userDoc['full_name'] ?? '',
+                            validator: (val) {
+                              if (val.isEmpty) return "Invalid name!";
+                              return null;
+                            },
+                            onSaved: (val) => data['full_name'] = val,
+                          ),
+                          const SizedBox(height: 10),
+                          DropdownButton(
+                            isExpanded: true,
+                            value: selectedGender,
+                            items: <String>['male', 'female'].map((String val) {
+                              return DropdownMenuItem(
+                                value: val,
+                                child: Text(val),
+                              );
+                            }).toList(),
+                            onChanged: (val) {
+                              setState(() {
+                                selectedGender = val;
+                                data['gender'] = val;
+                              });
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {
+                              DatePicker.showDatePicker(context,
+                                  showTitleActions: true,
+                                  minTime: DateTime.now()
+                                      .subtract(Duration(days: 36525)),
+                                  maxTime: DateTime.now()
+                                      .subtract(Duration(days: 6574)),
+                                  onChanged: (date) {
+                                data['dob'] =
+                                    date.toIso8601String().substring(0, 10);
+                              }, onConfirm: (date) {
+                                setState(() {
+                                  data['dob'] =
+                                      date.toIso8601String().substring(0, 10);
+                                });
+                              },
+                                  currentTime: DateTime.now(),
+                                  locale: LocaleType.en);
+                            },
+                            child: Text(
+                              data['dob'] == ''
+                                  ? 'Select date of birth'
+                                  : data['dob'],
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              label: Text('location'),
+                            ),
+                            keyboardType: TextInputType.text,
+                            initialValue: userDoc['location'] ?? '',
+                            validator: (val) {
+                              if (val.isEmpty) return "Invalid location!";
+                              return null;
+                            },
+                            onSaved: (val) => data['location'] = val,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              label: Text('Phone Number'),
+                            ),
+                            keyboardType: TextInputType.number,
+                            initialValue: userDoc['phone_number'] ?? '',
+                            validator: (String val) {
+                              if (!RegExp(r'^[79][0-9]{7}$').hasMatch(val)) {
+                                //it can start by 7 or 9 only
+                                return 'Invalid Phone Number';
+                              }
+                              return null;
+                            },
+                            onSaved: (val) => data['phone_number'] = val,
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            child: const Text('Save Profile'),
+                            onPressed: _updateProfile,
+                          ),
+                          ElevatedButton(
+                            child: const Text('Reset Password'),
+                            onPressed: () => Navigator.of(context)
+                                .pushNamed(ResetPassword.routeName),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                      DropdownButton(
-                        isExpanded: true,
-                        value: selectedGender,
-                        items: <String>['male', 'female'].map((String val) {
-                          return DropdownMenuItem(
-                            value: val,
-                            child: Text(val),
-                          );
-                        }).toList(),
-                        onChanged: (val) {
-                          setState(() {
-                            selectedGender = val;
-                            data['gender'] = val;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      TextButton(
-                        onPressed: () {
-                          DatePicker.showDatePicker(context,
-                              showTitleActions: true,
-                              minTime: DateTime.now()
-                                  .subtract(Duration(days: 36525)),
-                              maxTime:
-                                  DateTime.now().subtract(Duration(days: 6574)),
-                              onChanged: (date) {
-                            data['dob'] =
-                                date.toIso8601String().substring(0, 10);
-                          }, onConfirm: (date) {
-                            setState(() {
-                              data['dob'] =
-                                  date.toIso8601String().substring(0, 10);
-                            });
-                          },
-                              currentTime: DateTime.now(),
-                              locale: LocaleType.en);
-                        },
-                        child: Text(
-                          data['dob'] == ''
-                              ? 'Select date of birth'
-                              : data['dob'],
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text('location'),
-                        ),
-                        keyboardType: TextInputType.text,
-                        initialValue: userDoc['location'] ?? '',
-                        validator: (val) {
-                          if (val.isEmpty) return "Invalid location!";
-                          return null;
-                        },
-                        onSaved: (val) => data['location'] = val,
-                      ),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text('Phone Number'),
-                        ),
-                        keyboardType: TextInputType.number,
-                        initialValue: userDoc['phone_number'] ?? '',
-                        validator: (String val) {
-                          if (!RegExp(r'^[79][0-9]{7}$').hasMatch(val)) {
-                            //it can start by 7 or 9 only
-                            return 'Invalid Phone Number';
-                          }
-                          return null;
-                        },
-                        onSaved: (val) => data['phone_number'] = val,
-                      ),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        child: const Text('Save Profile'),
-                        onPressed: _updateProfile,
-                      ),
-                      ElevatedButton(
-                        child: const Text('Reset Password'),
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed(ResetPassword.routeName),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          }),
+                );
+              }),
+        ],
+      ),
     );
   }
 }

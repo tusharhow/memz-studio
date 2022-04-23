@@ -93,72 +93,99 @@ class _ResetPasswordState extends State<ResetPassword> {
         title: const Text('Reset Password'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text('old Password'),
-                  ),
-                  //Optimize for passwords that are visible to the user.
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  validator: (val) {
-                    if (val.length < 6) {
-                      //validation for old password
-                      return "Please enter at least 6 characters";
-                    }
-                    return null;
-                  },
-                  onSaved: (val) => data['old_password'] = val,
-                  //method to call with the final value when the form is saved
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text('New Password'),
-                  ),
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  validator: (val) {
-                    if (val.length < 6) {
-                      //validation for new password
-                      return "Please enter at least 6 characters";
-                    }
-                    return null;
-                  },
-                  onSaved: (val) => data['password'] = val,
-                  //use when user change the value
-                  onChanged: (val) => data['password'] = val,
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text('Confirm Password'),
-                  ),
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  validator: (val) {
-                    if (val != data['password']) {
-                      return "Please enter at least 6 characters";
-                    }
-                    return null;
-                  },
-                  onSaved: (val) => data['confirm_password'] = val,
-                ),
-                const SizedBox(height: 50),
-                ElevatedButton(
-                  child: const Text('Reset'),
-                  onPressed: resetPassword,
-                ),
-              ],
+      body: Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(
+              "assets/images/bg.png",
+              fit: BoxFit.cover,
             ),
           ),
-        ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 30,
+          //     right: 30,
+          //     left: 20,
+          //   ),
+          //   child: Image.asset(
+          //     "assets/images/menu.png",
+          //     height: 40,
+          //     width: 40,
+          //   ),
+          // ),
+          SizedBox(
+            height: 50,
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        label: Text('old Password'),
+                      ),
+                      //Optimize for passwords that are visible to the user.
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      validator: (val) {
+                        if (val.length < 6) {
+                          //validation for old password
+                          return "Please enter at least 6 characters";
+                        }
+                        return null;
+                      },
+                      onSaved: (val) => data['old_password'] = val,
+                      //method to call with the final value when the form is saved
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        label: Text('New Password'),
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      validator: (val) {
+                        if (val.length < 6) {
+                          //validation for new password
+                          return "Please enter at least 6 characters";
+                        }
+                        return null;
+                      },
+                      onSaved: (val) => data['password'] = val,
+                      //use when user change the value
+                      onChanged: (val) => data['password'] = val,
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        label: Text('Confirm Password'),
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      validator: (val) {
+                        if (val != data['password']) {
+                          return "Please enter at least 6 characters";
+                        }
+                        return null;
+                      },
+                      onSaved: (val) => data['confirm_password'] = val,
+                    ),
+                    const SizedBox(height: 50),
+                    ElevatedButton(
+                      child: const Text('Reset'),
+                      onPressed: resetPassword,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
